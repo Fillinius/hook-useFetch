@@ -10,11 +10,12 @@ export default function useFetch(URL) {
     getAsyncData()
   }, [url])
 
-  // useEffect(() => {
-  //   if (error !== null) {
-  //     setError(null)
-  //   }
-  // }, [error])
+  useEffect(() => {
+    if (error !== null) {
+      setError(true)
+      setIsLoading(true)
+    }
+  }, [error])
 
   async function getAsyncData() {
     try {
@@ -23,14 +24,20 @@ export default function useFetch(URL) {
         .then((data) => setData(data))
       setIsLoading(false)
     } catch (error) {
-      setError(false)
+      console.log('err', error)
+      setError(true)
     }
   }
+  // function getAsyncData() {
+  //   fetch(url)
+  //     .then((res) => res.json())
+  //     .then((data) => setData(data))
+  //     .catch((err) => setError(err))
+  //     .finally(() => setIsLoading(false))
+  // }
 
   function refetch({ params }) {
-    console.log(params._limit)
     setUrl((p) => `${p}/?_limit=${params._limit}`)
-    console.log(url)
   }
 
   return {
