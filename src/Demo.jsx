@@ -23,8 +23,8 @@ export default function Demo() {
       </div>
       {/* {isLoading && 'Загрузка...'} */}
       {/* {error && 'Произошла ошибка'} */}
-      {/* {data && !isLoading && data.map(item => <div key={item.id}>{item.title}</div>)} */}
-      {data.map(item => <div key={item.id}>{item.title}</div>)}
+      {data && !isLoading && data.map(item => <div key={item.id}>{item.title}</div>)}
+
     </div>
   );
 }
