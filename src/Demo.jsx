@@ -1,23 +1,22 @@
-import useFetch from "./hook/useFetch";
+import useFetch from './hook/useFetch.js'
 
 export default function Demo() {
+
   const {
     data,
     isLoading,
     error,
-    refetch
-  } = useFetch('https://jsonplaceholder.typicode.com/posts');
-  console.log(error, 'err');
-  // console.log(isLoading, 'load');
+    refetch } = useFetch('https://jsonplaceholder.typicode.com/posts')
+
   return (
     <div>
       <div>
         <button
-        // onClick={() => refetch({
-        //   params: {
-        //     _limit: 3
-        //   }
-        // })}
+          onClick={() => refetch({
+            params: {
+              _limit: 3
+            }
+          })}
         >
           Перезапросить
         </button>
