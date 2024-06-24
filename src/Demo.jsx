@@ -7,7 +7,8 @@ export default function Demo() {
     error,
     refetch
   } = useFetch('https://jsonplaceholder.typicode.com/posts');
-
+  console.log(error, 'err');
+  // console.log(isLoading, 'load');
   return (
     <div>
       <div>
@@ -21,8 +22,8 @@ export default function Demo() {
           Перезапросить
         </button>
       </div>
-      {/* {isLoading && 'Загрузка...'} */}
-      {/* {error && 'Произошла ошибка'} */}
+      {isLoading && 'Загрузка...'}
+      {error && 'Произошла ошибка'}
       {data && !isLoading && data.map(item => <div key={item.id}>{item.title}</div>)}
 
     </div>
