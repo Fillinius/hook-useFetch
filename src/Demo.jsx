@@ -1,12 +1,12 @@
 import useFetch from "./hook/useFetch";
 
 export default function Demo() {
-  // const {
-  //   data,
-  //   isLoading,
-  //   error,
-  //   refetch
-  // } = useFetch('https://jsonplaceholder.typicode.com/post');
+  const {
+    data,
+    isLoading,
+    error,
+    refetch
+  } = useFetch('https://jsonplaceholder.typicode.com/posts');
 
   return (
     <div>
@@ -24,6 +24,7 @@ export default function Demo() {
       {/* {isLoading && 'Загрузка...'} */}
       {/* {error && 'Произошла ошибка'} */}
       {/* {data && !isLoading && data.map(item => <div key={item.id}>{item.title}</div>)} */}
+      {data.map(item => <div key={item.id}>{item.title}</div>)}
     </div>
   );
 }
