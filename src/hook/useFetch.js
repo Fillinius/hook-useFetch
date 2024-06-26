@@ -13,28 +13,25 @@ export default function useFetch(URL) {
   useEffect(() => {
     if (error !== null) {
       setError(true)
-      setIsLoading(true)
+      setIsLoading(false)
     }
   }, [error])
 
   async function getAsyncData() {
     try {
       await fetch(url)
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Ошибка запроса')
+          }
+          return response.json()
+        })
         .then((data) => setData(data))
       setIsLoading(false)
     } catch (error) {
-      console.log('err', error)
       setError(true)
     }
   }
-  // function getAsyncData() {
-  //   fetch(url)
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data))
-  //     .catch((err) => setError(err))
-  //     .finally(() => setIsLoading(false))
-  // }
 
   function refetch({ params }) {
     setUrl((p) => `${p}/?_limit=${params._limit}`)
