@@ -1,10 +1,16 @@
 import { useEffect, useState } from 'react'
 
-export default function useFetch(URL) {
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [url, setUrl] = useState(URL)
+interface Post {
+  id: number
+  title: string
+}
+type FetchError = Error | null | boolean
+
+export default function useFetch(URL: string) {
+  const [data, setData] = useState<Post[] | []>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [error, setError] = useState<FetchError>(null)
+  const [url, setUrl] = useState<string>(URL)
 
   useEffect(() => {
     getAsyncData()
@@ -20,13 +26,14 @@ export default function useFetch(URL) {
   async function getAsyncData() {
     try {
       await fetch(url)
-        .then((response) => {
+        .then((response: Response) => {
           if (!response.ok) {
             throw new Error('Ошибка запроса')
           }
           return response.json()
         })
-        .then((data) => setData(data))
+        .then((data: Post[]) => setData(data))
+      console.log(data)
       setIsLoading(false)
     } catch (error) {
       setError(true)
