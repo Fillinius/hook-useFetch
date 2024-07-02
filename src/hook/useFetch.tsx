@@ -8,12 +8,13 @@ type FetchError = Error | null | boolean
 
 export default function useFetch(URL: string) {
   const [data, setData] = useState<Post[] | []>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [error, setError] = useState<FetchError>(null)
   const [url, setUrl] = useState<string>(URL)
 
   useEffect(() => {
     getAsyncData()
+    setIsLoading(true)
   }, [url])
 
   useEffect(() => {
